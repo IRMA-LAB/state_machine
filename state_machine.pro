@@ -28,4 +28,4 @@ SOURCES = \
    $$PWD/src/stdafx.cpp \
    $$PWD/src/xallocator.cpp
 
-INCLUDEPATH = $$PWD/inc
+INCLUDEPATH += $$PWD/inc

@@ -31,5 +31,9 @@
 *.out
 *.app
 
+# Build folders
+build*
+lib
+
 # Qt
 *.pro.user
