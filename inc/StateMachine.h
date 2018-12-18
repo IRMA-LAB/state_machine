@@ -252,21 +252,21 @@ private:
 	StateAction<stateMachine, eventData, &stateMachine::ST_##stateName> stateName;
 	
 #define STATE_DEFINE(stateMachine, stateName, eventData) \
-	void stateMachine::ST_##stateName(const eventData* data)
+	void stateMachine::ST_##stateName(const __attribute((unused)) eventData* data)
 		
 #define GUARD_DECLARE(stateMachine, guardName, eventData) \
 	BOOL GD_##guardName(const eventData*); \
 	GuardCondition<stateMachine, eventData, &stateMachine::GD_##guardName> guardName;
 	
 #define GUARD_DEFINE(stateMachine, guardName, eventData) \
-	BOOL stateMachine::GD_##guardName(const eventData* data)
+	BOOL stateMachine::GD_##guardName(const __attribute((unused)) eventData* data)
 
 #define ENTRY_DECLARE(stateMachine, entryName, eventData) \
 	void EN_##entryName(const eventData*); \
 	EntryAction<stateMachine, eventData, &stateMachine::EN_##entryName> entryName;
 	
 #define ENTRY_DEFINE(stateMachine, entryName, eventData) \
-	void stateMachine::EN_##entryName(const eventData* data)
+  void stateMachine::EN_##entryName(const __attribute((unused)) eventData* data)
 
 #define EXIT_DECLARE(stateMachine, exitName) \
 	void EX_##exitName(void); \
