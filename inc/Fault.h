@@ -12,7 +12,7 @@ extern "C" {
 #ifndef C_ASSERT
 #define C_ASSERT(expr)                                                                   \
   {                                                                                      \
-    char uname[(expr) ? 1 : -1];                                                         \
+    __attribute((unused)) char uname[(expr) ? 1 : -1];                                                         \
     uname[0] = 0;                                                                        \
   }
 #endif
