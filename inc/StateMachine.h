@@ -65,7 +65,7 @@ class StateAction: public StateBase
     // This next internal event is not valid and causes the assert to fail:
     //    InternalEvent(ST_MY_STATE_FUNCTION, new OtherEventData());
     const Data* derivedData = dynamic_cast<const Data*>(data);
-    ASSERT_TRUE(derivedData != NULL);
+    ASSERT_TRUE(derivedData != nullptr);
 
     // Call the state function
     (derivedSM->*Func)(derivedData);
@@ -96,7 +96,7 @@ class GuardCondition: public GuardBase
   {
     SM* derivedSM           = static_cast<SM*>(sm);
     const Data* derivedData = dynamic_cast<const Data*>(data);
-    ASSERT_TRUE(derivedData != NULL);
+    ASSERT_TRUE(derivedData != nullptr);
 
     // Call the guard function
     return (derivedSM->*Func)(derivedData);
@@ -125,7 +125,7 @@ class EntryAction: public EntryBase
   {
     SM* derivedSM           = static_cast<SM*>(sm);
     const Data* derivedData = dynamic_cast<const Data*>(data);
-    ASSERT_TRUE(derivedData != NULL);
+    ASSERT_TRUE(derivedData != nullptr);
 
     // Call the entry function
     (derivedSM->*Func)(derivedData);
@@ -199,13 +199,13 @@ class StateMachine
   /// External state machine event.
   /// @param[in] newState - the state machine state to transition to.
   /// @param[in] pData - the event data sent to the state.
-  void ExternalEvent(BYTE newState, const EventData* pData = NULL);
+  void ExternalEvent(BYTE newState, const EventData* pData = nullptr);
 
   /// Internal state machine event. These events are generated while executing
   ///	within a state machine state.
   /// @param[in] newState - the state machine state to transition to.
   /// @param[in] pData - the event data sent to the state.
-  void InternalEvent(BYTE newState, const EventData* pData = NULL);
+  void InternalEvent(BYTE newState, const EventData* pData = nullptr);
 
  private:
   /// The maximum number of state machine states.
@@ -297,7 +297,7 @@ class StateMachine
 
 #define BEGIN_STATE_MAP                                                                  \
  private:                                                                                \
-  virtual const StateMapRowEx* GetStateMapEx() override { return NULL; }                 \
+  virtual const StateMapRowEx* GetStateMapEx() override { return nullptr; }              \
   const StateMapRow STATE_MAP[ST_MAX_STATES] = {
 
 #define STATE_MAP_ENTRY(stateName) stateName,
@@ -309,10 +309,10 @@ class StateMachine
 
 #define BEGIN_STATE_MAP_EX                                                               \
  private:                                                                                \
-  virtual const StateMapRow* GetStateMap() { return NULL; }                              \
+  virtual const StateMapRow* GetStateMap() override { return nullptr; }                  \
   const StateMapRowEx STATE_MAP[ST_MAX_STATES] = {
 
-#define STATE_MAP_ENTRY_EX(stateName) {stateName, 0, 0, 0},
+#define STATE_MAP_ENTRY_EX(stateName) {stateName, nullptr, nullptr, nullptr},
 
 #define STATE_MAP_ENTRY_ALL_EX(stateName, guardName, entryName, exitName)                \
   {stateName, guardName, entryName, exitName},
@@ -320,6 +320,6 @@ class StateMachine
 #define END_STATE_MAP_EX                                                                 \
   }                                                                                      \
   ;                                                                                      \
-  virtual const StateMapRowEx* GetStateMapEx() { return &STATE_MAP[0]; }
+  virtual const StateMapRowEx* GetStateMapEx() override { return &STATE_MAP[0]; }
 
 #endif // _STATE_MACHINE_H

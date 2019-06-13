@@ -12,18 +12,18 @@ extern "C" {
 #ifndef C_ASSERT
 #define C_ASSERT(expr)                                                                   \
   {                                                                                      \
-    __attribute((unused)) char uname[(expr) ? 1 : -1];                                                         \
+    __attribute((unused)) char uname[(expr) ? 1 : -1];                                   \
     uname[0] = 0;                                                                        \
   }
 #endif
 
-#define ASSERT() FaultHandler(__FILE__, (unsigned short)__LINE__)
+#define ASSERT() FaultHandler(__FILE__, static_cast<unsigned short>(__LINE__))
 
 #define ASSERT_TRUE(condition)                                                           \
   do                                                                                     \
   {                                                                                      \
     if (!(condition))                                                                    \
-      FaultHandler(__FILE__, (unsigned short)__LINE__);                                  \
+      FaultHandler(__FILE__, static_cast<unsigned short>(__LINE__));                     \
   } while (0)
 
 /// Handles all software assertions in the system.
